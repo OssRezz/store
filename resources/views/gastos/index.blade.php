@@ -35,6 +35,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">Fecha</th>
+                                    <th class="text-center">Usuario</th>
                                     <th class="text-center">Gasto</th>
                                     <th class="text-center">Valor</th>
                                     <th class="text-center">Accion</th>
@@ -45,6 +46,7 @@
                                 @foreach ($gastos as $item)
                                     <tr>
                                         <td class="text-center">{{ $item->fecha }}</td>
+                                        <td class="text-center">{{ $item->User->name }}</td>
                                         <td class="text-center">{{ $item->gasto }}</td>
                                         <td class="text-center">${{ number_format($item->valor) }}</td>
                                         <td class="text-center">

@@ -12,5 +12,10 @@ class Gasto extends Model
         'valor',
         'gasto',
         'fecha',
+        'user_id'
     ];
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

@@ -26,6 +26,7 @@ class CreateGastoRequest extends FormRequest
         return [
             'gasto' => 'required',
             'valor' => 'required',
+            'user_id' => 'required',
         ];
     }
 }

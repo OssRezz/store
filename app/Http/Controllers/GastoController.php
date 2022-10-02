@@ -16,7 +16,7 @@ class GastoController extends Controller
      */
     public function index()
     {
-        $gastos = Gasto::all();
+        $gastos = Gasto::with('User')->get();
         return view('gastos.index', compact('gastos'));
     }
 
@@ -43,6 +43,7 @@ class GastoController extends Controller
         $gasto->gasto = $request->gasto;
         $gasto->valor = $request->valor;
         $gasto->fecha = date('Y-m-d');
+        $gasto->user_id = $request->user_id;
         $gasto->save();
         return redirect()->to('admin/gastos')->with('message', 'Gasto creado exitosamente');
     }

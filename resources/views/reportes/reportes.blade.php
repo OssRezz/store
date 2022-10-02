@@ -124,7 +124,7 @@
                                     <select id="reporte" class="form-select">
                                         <option value="Ventas">Ventas</option>
                                         <option value="Compras">Compras</option>
-                                        <option value="Tipo de pago">Tipo de pago</option>
+                                        <option value="Tipo de pago">Total por formas de pago</option>
                                     </select>
                                     <label for="">Reporte</label>
                                 </div>

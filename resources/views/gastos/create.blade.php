@@ -33,6 +33,8 @@
 
                     <form method="POST" action="{{ route('admin.gastos.store') }}">
                         @csrf
+                        <input type="text" name="user_id" value="{{ Auth::user()->id }}" hidden>
+
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" placeholder="Gasto" name="gasto"
                                 {{ $errors->has('gasto') ? 'is-invalid' : '' }} value="{{ old('gasto', '') }}" />

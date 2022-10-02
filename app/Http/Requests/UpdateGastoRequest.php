@@ -26,6 +26,7 @@ class UpdateGastoRequest extends FormRequest
         return [
             'gasto' => 'required|string',
             'valor' => 'required|numeric',
+            'user_id' => 'required|numeric',
         ];
     }
 }
