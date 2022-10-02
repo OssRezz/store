@@ -18,11 +18,11 @@
 
 ## En la consola escribrimos los siguientes comandos:
 
--    1)composer install, en caso de error composer update
--    2)php artisan key:generate
--    3)Agregamos la base de datos a phpmyadmin y al archivo .env
--    4)php artisan migrate:fresh --seed
--    5)Ingresamamos a la url localhost/store/public/
+-    composer install, en caso de error composer update
+-    php artisan key:generate
+-    Agregamos la base de datos a phpmyadmin y al archivo .env
+-    php artisan migrate:fresh --seed
+-    Ingresamamos a la url localhost/store/public/
 
 ## Datos para ingresar:
 
