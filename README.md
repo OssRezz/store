@@ -3,7 +3,7 @@
 ## Descripcion:
 
 <p>Aplicación web desarrollada en Laravel, Bootstrap, MySQL y las mejores practicas posibles basadas en mi conocimiento actual. La aplicación permite administrar usuarios, productos, inventario, ventas, compras, gastos, salidas y generar reportes sobre esta información.</p>
-<p>Esta aplicación fue desarrollado por mi y se encuentra a disposición de cualquier persona.</p> 
+<p>Esta aplicación se encuentra a disposición de cualquier persona que necesite un software para gestionar sus compras/ventas.</p> 
 <p>Si tienes dudas o necesitas ayuda, no dudes en ponerte en contacto conmigo: OssRezz.13@gmail.com</p>
 
 ## Requisitos:
