@@ -222,6 +222,7 @@ function guardarCompra() {
             colValorSegunda.setAttribute("hidden", true);
             segundaOpcion.checked = false;
             valor_pago_dos.value = "";
+            carritoDeVenta = [];
             return alertaToast("Venta almacenada exitosamente", "success");
         },
     });

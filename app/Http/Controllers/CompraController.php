@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\FacturaCompraExport;
 use App\Models\Compra;
 use App\Models\DetalleCompra;
 use App\Models\Inventario;
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CompraController extends Controller
 {
@@ -74,5 +76,33 @@ class CompraController extends Controller
     {
         $producto = Producto::find($id);
         return $producto;
+    }
+
+    public function reporteCompras(Request $request)
+    {
+        $request->validate([
+            'fecha_inicio' => 'required',
+            'fecha_fin' => 'required',
+        ]);
+        $compras = DetalleCompra::join('compras', 'compras.id', '=', 'detalle_compra.compra_id')
+            ->join('users', 'users.id', '=', 'compras.user_id')
+            ->join('productos', 'productos.id', '=', 'detalle_compra.producto_id')
+            ->select(
+                'users.name',
+                'detalle_compra.compra_id',
+                'compras.fecha',
+                'productos.nombre',
+                'productos.codigo',
+                'detalle_compra.cantidad',
+                'detalle_compra.valor',
+                'compras.valor_total',
+                'compras.observaciones',
+            )
+            ->orderByDesc('detalle_compra.compra_id')
+            ->whereBetween('compras.fecha', [$request->fecha_inicio, $request->fecha_fin])->get();
+
+        $export = new FacturaCompraExport([$compras]);
+
+        return Excel::download($export, 'compras.xlsx');
     }
 }

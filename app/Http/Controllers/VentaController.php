@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\FacturaVentaExport;
+use App\Exports\ReporteTipoPagosExport;
 use App\Models\DetalleVenta;
 use App\Models\Inventario;
 use App\Models\Producto;
 use App\Models\Venta;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class VentaController extends Controller
 {
@@ -24,16 +27,6 @@ class VentaController extends Controller
             ->select('inventario.*', 'productos.precio_compra', 'productos.precio_venta', 'productos.nombre', 'productos.codigo')
             ->where('cantidad', '>', 0)->get();
         return view('ventas.index', compact('inventario', 'factura'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -92,37 +85,80 @@ class VentaController extends Controller
         return $producto; //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function reporteVentas(Request $request)
     {
-        //
+        $request->validate([
+            'fecha_inicio' => 'required',
+            'fecha_fin' => 'required',
+        ]);
+
+        $ventas = DetalleVenta::join('ventas', 'ventas.id', '=', 'detalle_venta.venta_id')
+            ->join('users', 'users.id', '=', 'ventas.user_id')
+            ->join('productos', 'productos.id', '=', 'detalle_venta.producto_id')
+            ->select(
+                'users.name',
+                'detalle_venta.venta_id',
+                'ventas.fecha',
+                'productos.nombre',
+                'productos.codigo',
+                'detalle_venta.tipo_venta',
+                'detalle_venta.cantidad',
+                'detalle_venta.descuento',
+                'detalle_venta.valor',
+                'ventas.valor_total',
+                'ventas.observaciones',
+            )
+            ->orderByDesc('detalle_venta.venta_id')
+            ->whereBetween('ventas.fecha', [$request->fecha_inicio, $request->fecha_fin])->get();
+
+        $export = new FacturaVentaExport([$ventas]);
+
+        return Excel::download($export, 'ventas.xlsx');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function reporteFormaPago(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'fecha_inicio' => 'required',
+            'fecha_fin' => 'required',
+        ]);
+        $ventas = Venta::whereBetween('ventas.fecha', [$request->fecha_inicio, $request->fecha_fin])->get();
+        $Credito = 0;
+        $Efectivo = 0;
+        $Transacción = 0;
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        foreach ($ventas as $key => $venta) {
+
+            if ($venta->forma_pago_dos == null) {
+                if ($venta->forma_pago == "Credito") {
+                    $Credito = $Credito + $venta->valor_total;
+                } else if ($venta->forma_pago == "Efectivo") {
+                    $Efectivo = $Efectivo + $venta->valor_total;
+                } else if ($venta->forma_pago == "Transacción") {
+                    $Transacción = $Transacción + $venta->valor_total;
+                }
+            } else {
+                if ($venta->forma_pago == "Credito") {
+                    $Credito = $Credito + ($venta->valor_total - $venta->valor_pago_dos);
+                } else if ($venta->forma_pago == "Efectivo") {
+                    $Efectivo = $Efectivo + ($venta->valor_total - $venta->valor_pago_dos);
+                } else if ($venta->forma_pago == "Transacción") {
+                    $Transacción = $Transacción + ($venta->valor_total - $venta->valor_pago_dos);
+                }
+
+                if ($venta->forma_pago_dos == "Credito") {
+                    $Credito = $Credito + $venta->valor_pago_dos;
+                } else if ($venta->forma_pago_dos == "Efectivo") {
+                    $Efectivo = $Efectivo + $venta->valor_pago_dos;
+                } else if ($venta->forma_pago_dos == "Transacción") {
+                    $Transacción = $Transacción + $venta->valor_pago_dos;
+                }
+            }
+        }
+
+
+        $export = new ReporteTipoPagosExport([["Transacción" => $Transacción, "Credito" =>  $Credito, "Efectivo" => $Efectivo]]);
+
+        return Excel::download($export, 'forma_pago.xlsx');
     }
 }

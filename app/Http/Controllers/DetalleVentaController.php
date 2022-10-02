@@ -18,7 +18,7 @@ class DetalleVentaController extends Controller
 
     public function show($id)
     {
-        $venta = Venta::with('UsuarioFk')->find($id);
+        $venta = Venta::with('Users')->find($id);
         $detalle_ventas = DetalleVenta::with('productoFk')->where('venta_id', $id)->get();
         return view('detalleventa.show', compact('venta', 'detalle_ventas'));
     }

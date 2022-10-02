@@ -99,6 +99,46 @@
         </div>
         <div class="col-12 mb-4">
             <div class="card shadow-sm">
+                <div class="card-header">
+                    <i class="fa-solid fa-file-excel"></i> <b>Reportes</b>
+                </div>
+                <div class="card-body d-flex justify-content-center">
+                    <div class="col">
+                        <div class="row d-flex align-items-center">
+                            <div class="col-12 col-xl-3 mb-3">
+                                <div class="form-floating">
+                                    <input type="date" value="{{ date('Y-m-d') }}" class="form-control"
+                                        placeholder="Fecha de inicio" id="fecha_inicio">
+                                    <label for="">Fecha de inicio</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl-3 mb-3">
+                                <div class="form-floating">
+                                    <input type="date" value="{{ date('Y-m-d') }}" class="form-control"
+                                        placeholder="Fecha de fin" id="fecha_fin">
+                                    <label for="">Fecha de fin</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl-4  mb-3">
+                                <div class="form-floating">
+                                    <select id="reporte" class="form-select">
+                                        <option value="Ventas">Ventas</option>
+                                        <option value="Compras">Compras</option>
+                                        <option value="Tipo de pago">Tipo de pago</option>
+                                    </select>
+                                    <label for="">Reporte</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl-2 text-center">
+                                <button class="btn btn-danger" onclick="getReport();">Generar reporte</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mb-4">
+            <div class="card shadow-sm">
                 <div class="card-header"><i class="fa-solid fa-chart-line"></i> <b>Ventas por dia mes:
                         {{ $mes }}</b>
                 </div>
@@ -107,8 +147,11 @@
                 </div>
             </div>
         </div>
+
     </div>
+    <script src="{{ asset('assets/js/toast.js') }}" defer></script>
     <script src="{{ asset('assets/js/reportes/chartLine.js') }}" defer></script>
+    <script src="{{ asset('assets/js/reportes/reports.js') }}" defer></script>
     <script src="{{ asset('assets/js/reportes/chartDonaProducto.js') }}" defer></script>
     <script src="{{ asset('assets/js/reportes/chartDonaStock.js') }}" defer></script>
 @endsection

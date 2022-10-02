@@ -32,7 +32,7 @@
                                 </tr>
                                 <tr>
                                     <th>Usuario</th>
-                                    <td>{{ $venta->UsuarioFk->name }}</td>
+                                    <td>{{ $venta->Users->name }}</td>
                                 </tr>
                                 <tr {{ $venta->observaciones == null ? 'hidden' : '' }}>
                                     <th>Observaciones</th>

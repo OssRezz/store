@@ -30,4 +30,33 @@ class SalidaController extends Controller
 
         return redirect()->to('admin/inventarios')->with('message', 'Salida creada exitosamente');
     }
+
+    public function edit($id)
+    {
+        $salida = Salida::with('ProductoFk')->find($id);
+        return view('salidas.edit', compact('salida'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            "cantidad" => "required",
+            "observaciones" => ""
+        ]);
+        $salida = Salida::find($id);
+
+        $salidaInInventary = Inventario::where('producto_id', $salida->producto_id)->get();
+        $inventario = Inventario::find($salidaInInventary[0]['id']);
+        $inventario->cantidad = $inventario->cantidad + $salida->cantidad;
+        $inventario->update();
+
+        $salida->cantidad =  $request->cantidad;
+        $salida->observaciones = $request->observaciones;
+        $salida->update();
+
+        $inventario->cantidad = $inventario->cantidad - $request->cantidad;
+        $inventario->update();
+
+        return redirect()->to('admin/salidas')->with('message', 'Salida actualizada exitosamente');
+    }
 }
