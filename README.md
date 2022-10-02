@@ -1,15 +1,9 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Store App:
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Descripcion:
 
-## About Laravel
-
-# Para instalar la app:
+<p>Esta aplicacion fue desarrollado por mi y se encuentraa disposicion de cualquier persona. Si tienes dudas o necesitas ayuda, no dudes en ponerte en contacto conmigo: OssRezz.13@gmail.com</p>
+<p>La aplicacion permite administrar usuarios, productos, inventario, ventas, compras, gastos, salidas.</p>
 
 ## Requisitos:
 
@@ -18,11 +12,11 @@
 
 ## En la consola escribrimos los siguientes comandos:
 
--    composer install, en caso de error composer update
--    php artisan key:generate
--    Agregamos la base de datos a phpmyadmin y al archivo .env
--    php artisan migrate:fresh --seed
--    Ingresamamos a la url localhost/store/public/
+-   composer install, en caso de error composer update
+-   php artisan key:generate
+-   Agregamos la base de datos a phpmyadmin y al archivo .env
+-   php artisan migrate:fresh --seed
+-   Ingresamamos a la url localhost/store/public/
 
 ## Datos para ingresar:
 
