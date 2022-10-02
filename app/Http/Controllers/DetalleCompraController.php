@@ -18,7 +18,7 @@ class DetalleCompraController extends Controller
 
     public function show($id)
     {
-        $compra = Compra::with('UsuarioFk')->find($id);
+        $compra = Compra::with('Users')->find($id);
         $detalle_compras = DetalleCompra::with('productoFk')->where('compra_id', $id)->get();
 
         return view('detallecompra.show', compact('compra', 'detalle_compras'));

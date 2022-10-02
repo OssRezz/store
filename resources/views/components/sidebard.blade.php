@@ -11,7 +11,7 @@
                 Inicio
             </a>
         </li>
-        <li class="py-1">
+        <li class="py-1" {{ Auth::user()->roles_id != 1 ? 'hidden' : '' }}>
             <a href="{{ url('admin/reportes') }}"
                 class="btn btn-outline-danger text-start border-0 rounded-0 {{ request()->is('admin/reportes') || request()->is('admin/reportes/*') ? 'active' : '' }}">
                 <i class="fa-solid fa-chart-pie fa-xl"></i> Reportes

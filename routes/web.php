@@ -38,17 +38,24 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::get('salidas/edit/{id}', [SalidaController::class, 'edit']);
     Route::get('salidas/{producto}', [SalidaController::class, 'new']);
     Route::post('salidas/store', [SalidaController::class, 'store']);
+    Route::put('salidas/update/{salida}', [SalidaController::class, 'update']);
 
     Route::get('reportes', [ReporteController::class, 'index']);
     Route::get('reportes/chartLine', [ReporteController::class, 'chartLine']);
     Route::get('reportes/chartDonaProductos', [ReporteController::class, 'chartDonaProductos']);
     Route::get('reportes/chartDonaStock', [ReporteController::class, 'chartDonaStock']);
 
+    Route::resource('ventas', VentaController::class);
+    Route::post('ventas/export', [VentaController::class, 'reporteVentas']);
+    Route::post('ventas_pago/export', [VentaController::class, 'reporteFormaPago']);
+
+    Route::resource('compras', CompraController::class);
+    Route::post('compras/export', [CompraController::class, 'reporteCompras']);
+
+
     Route::get('home', [HomeController::class, 'index']);
     Route::resource('usuarios', UserController::class);
     Route::resource('productos', ProductoController::class);
-    Route::resource('compras', CompraController::class);
-    Route::resource('ventas', VentaController::class);
     Route::resource('gastos', GastoController::class);
     Route::resource('inventarios', InventarioController::class);
     Route::resource('detalleventa', DetalleVentaController::class);

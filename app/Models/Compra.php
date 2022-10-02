@@ -14,7 +14,7 @@ class Compra extends Model
         'fecha',
         'users_id',
     ];
-    public function UsuarioFk()
+    public function Users()
     {
         return $this->belongsTo(User::class, 'user_id');
     }

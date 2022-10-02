@@ -47,7 +47,8 @@
                                                 <i class="fas fa-eye" style="pointer-events: none"></i>
                                             </a>
                                             <a class="btn btn-outline-danger btn-table border-0 btn-sm"
-                                                href="{{ route('admin.detallecompra.edit', $item->id) }}">
+                                                href="{{ route('admin.detallecompra.edit', $item->id) }}"
+                                                {{ Auth::user()->roles_id != 1 ? 'hidden' : '' }}>
                                                 <i class="fas fa-edit" style="pointer-events: none"></i>
                                             </a>
                                         </td>
