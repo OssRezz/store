@@ -13,7 +13,7 @@
 
 ## En la consola escribrimos los siguientes comandos:
 
--   composer install, en caso de error composer update
+-   composer instal, en caso de error composer update
 -   php artisan key:generate
 -   Agregamos la base de datos a phpmyadmin y al archivo .env
 -   php artisan migrate:fresh --seed
