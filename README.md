@@ -13,16 +13,16 @@
 
 ## Requisitos:
 
--   [Xampp]
--   [php 8+]
+-   Xampp
+-   php 8+
 
 ## En la consola escribrimos los siguientes comandos:
 
--   [ 1)composer install, en caso de error composer update]
--   [ 2)php artisan key:generate]
--   [ 3)Agregamos la base de datos a phpmyadmin y al archivo .env]
--   [ 4)php artisan migrate:fresh --seed]
--   [ 5)Ingresamamos a la url localhost/store/public/]
+-    1)composer install, en caso de error composer update
+-    2)php artisan key:generate
+-    3)Agregamos la base de datos a phpmyadmin y al archivo .env
+-    4)php artisan migrate:fresh --seed
+-    5)Ingresamamos a la url localhost/store/public/
 
 ## Datos para ingresar:
 
