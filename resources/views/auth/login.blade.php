@@ -63,6 +63,9 @@
                         </div>
                     @endif
                 </div>
+
             </div>
         </div>
-    @endsection
+    </div>
+    <div class="col-12 text-center">@ Desarrollado por <b>James Osorio Florez</b></div>
+@endsection
