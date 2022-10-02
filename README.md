@@ -1,8 +1,9 @@
-# Store App:
+# Store App
 
 ## Descripcion:
 
-<p>Esta aplicacion fue desarrollado por mi y se encuentraa disposicion de cualquier persona. Si tienes dudas o necesitas ayuda, no dudes en ponerte en contacto conmigo: OssRezz.13@gmail.com</p>
+<p>Esta aplicacion fue desarrollado por mi y se encuentra a disposicion de cualquier persona.</p> 
+<p>Si tienes dudas o necesitas ayuda, no dudes en ponerte en contacto conmigo: OssRezz.13@gmail.com</p>
 <p>La aplicacion permite administrar usuarios, productos, inventario, ventas, compras, gastos, salidas.</p>
 
 ## Requisitos:
