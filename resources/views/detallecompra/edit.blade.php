@@ -108,7 +108,7 @@
                         </div>
                     </div>
                     <div class="d-grid">
-                        <button class="btn btn-outline-danger" onclick="guardarCompra(this)">Guardar compra</button>
+                        <button class="btn btn-outline-danger" onclick="guardarCompra(this)">Actualizar compra</button>
                     </div>
                 </div>
             </div>

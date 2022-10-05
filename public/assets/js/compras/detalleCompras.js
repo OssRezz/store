@@ -52,7 +52,7 @@ function selectProduct(e) {
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
-        url: "compras/" + e.id,
+        url: "/store/public/admin/compras/" + e.id,
         type: "GET",
         data: { id: e.id },
         success: function (result) {
