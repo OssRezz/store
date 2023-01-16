@@ -67,5 +67,5 @@
             </div>
         </div>
     </div>
-    <div class="col-12 text-center" hidden>@ Desarrollado por <b>James Osorio Florez</b></div>
+    <div class="col-12 text-center">@ Desarrollado por <b>James Osorio Florez</b></div>
 @endsection
