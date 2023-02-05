@@ -1,4 +1,7 @@
 table = $("#tableclient").DataTable({
+    initComplete: function () {
+        $("#tableclient_filter label input").focus();
+    },
     paging: true,
     lengthChange: false,
     responsive: true,

@@ -48,6 +48,9 @@
 
     </div>
     <script src="{{ asset('assets/js/hbMenu.js') }}"></script>
+    <script defer>
+        $('div.dataTables_filter input', table.table().container()).focus();
+    </script>
 </body>
 
 </html>
