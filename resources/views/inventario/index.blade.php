@@ -57,15 +57,19 @@
                                         <td class="text-end">{{ $item->productoFk->stock }}</td>
                                         <td class="text-center">
                                             <a class="btn btn-outline-danger btn-table border-0 btn-sm"
-                                                href="{{ url('admin/salidas', $item->id) }}">
-                                                <i class="fa-regular fa-circle-xmark" style="pointer-events: none"></i>
+                                                href="{{ url('admin/ingresos', $item->id) }}">
+                                                <i class="fa-regular fa-people-carry-box" style="pointer-events: none"></i>
                                             </a>
                                             <a class="btn btn-outline-danger btn-table border-0 btn-sm"
-                                                href="{{ route('admin.inventarios.show', $item->id) }}">
+                                                href="{{ url('admin/salidas', $item->id) }}">
+                                                <i class="fa-regular fa-dolly" style="pointer-events: none"></i>
+                                            </a>
+                                            <a class="btn btn-outline-danger btn-table border-0 btn-sm"
+                                                href="{{ route('admin.inventarios.show', $item->id) }}" >
                                                 <i class="fas fa-eye" style="pointer-events: none"></i>
                                             </a>
                                             <a class="btn btn-outline-danger btn-table border-0 btn-sm"
-                                                href="{{ route('admin.inventarios.edit', $item->id) }}">
+                                                href="{{ route('admin.inventarios.edit', $item->id) }}" {{ Auth::user()->roles_id != 1 ? 'hidden' : '' }}>
                                                 <i class="fas fa-edit" style="pointer-events: none"></i>
                                             </a>
                                         </td>
@@ -78,9 +82,32 @@
             </div>
         </div>
     </div>
+    <div class="row d-flex justify-content-end my-3 px-2">
+        <div class="col-12 col-xl-2 d-flex justify-content-end">
+            <small><em><b>Ingresos </b><button class="btn btn-outline-danger btn-sm  border-0" data-bs-toggle="tooltip"
+                        data-bs-placement="top" title="Nueva sede"><i class="fas fa-people-carry-box fa-lg"
+                            style="pointer-events: none;"></i></button></em></small>
+        </div>
+        <div class="col-12 col-xl-2 d-flex justify-content-end">
+            <small><em><b>Salidas </b><button class="btn btn-outline-danger btn-sm  border-0" data-bs-toggle="tooltip"
+                        data-bs-placement="top" title="Nueva sede"><i class="fas fa-dolly fa-lg"
+                            style="pointer-events: none;"></i></button></em></small>
+        </div>
+        <div class="col-12 col-xl-2 d-flex justify-content-end">
+            <small><em><b>Información</b><button class="btn btn-outline-danger btn-sm  border-0" data-bs-toggle="tooltip"
+                        data-bs-placement="top" title="Ver empresa"><i class="fas fa-eye"
+                            style="pointer-events: none;"></i></button></em></small>
+        </div>
+        <div class="col-12 col-xl-2 d-flex justify-content-end">
+            <small><em><b>Editar</b><button class="btn btn-outline-danger btn-sm  border-0" data-bs-toggle="tooltip"
+                        data-bs-placement="top" title="Editar empresa"><i class="fas fa-edit"
+                            style="pointer-events: none;"></i></button></em></small>
+        </div>
+    </div>
     <script defer>
         table = $('#tableInventario').DataTable({
-            paging: true
+            paging: true,
+            responve: true
         });
     </script>
 @endsection

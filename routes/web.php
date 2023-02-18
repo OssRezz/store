@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\CompraController;
+use App\Http\Controllers\CuadreController;
 use App\Http\Controllers\DetalleCompraController;
 use App\Http\Controllers\DetalleVentaController;
 use App\Http\Controllers\GastoController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IngresosController;
 use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductoController;
@@ -40,10 +42,21 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::post('salidas/store', [SalidaController::class, 'store']);
     Route::put('salidas/update/{salida}', [SalidaController::class, 'update']);
 
+    Route::get('ingresos', [IngresosController::class, 'index']);
+    Route::get('ingresos/edit/{id}', [IngresosController::class, 'edit']);
+    Route::get('ingresos/{producto}', [IngresosController::class, 'new']);
+    Route::post('ingresos/store', [IngresosController::class, 'store']);
+    Route::put('ingresos/update/{salida}', [IngresosController::class, 'update']);
+
     Route::get('reportes', [ReporteController::class, 'index']);
     Route::get('reportes/chartLine', [ReporteController::class, 'chartLine']);
     Route::get('reportes/chartDonaProductos', [ReporteController::class, 'chartDonaProductos']);
     Route::get('reportes/chartDonaStock', [ReporteController::class, 'chartDonaStock']);
+
+    Route::get('cuadres', [CuadreController::class, 'index']);
+    // Route::get('reportes/chartLine', [ReporteController::class, 'chartLine']);
+    // Route::get('reportes/chartDonaProductos', [ReporteController::class, 'chartDonaProductos']);
+    // Route::get('reportes/chartDonaStock', [ReporteController::class, 'chartDonaStock']);
 
     Route::resource('ventas', VentaController::class);
     Route::post('ventas/export', [VentaController::class, 'reporteVentas']);

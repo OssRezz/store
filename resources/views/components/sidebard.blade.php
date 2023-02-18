@@ -17,6 +17,12 @@
                 <i class="fa-solid fa-chart-pie fa-xl"></i> Reportes
             </a>
         </li>
+        <li class="py-1" {{ Auth::user()->roles_id != 1 ? 'hidden' : '' }}>
+            <a href="{{ url('admin/cuadres') }}"
+                class="btn btn-outline-danger text-start border-0 rounded-0 {{ request()->is('admin/cuadres') || request()->is('admin/cuadres/*') ? 'active' : '' }}">
+                <i class="fa-solid fa-file-invoice-dollar fa-xl"></i> Cuadre
+            </a>
+        </li>
         <li class="py-1">
             <a href="{{ url('admin/usuarios') }}"
                 class="btn btn-outline-danger text-start border-0 rounded-0 {{ request()->is('admin/usuarios') || request()->is('admin/usuarios/*') ? 'active' : '' }}">
@@ -63,6 +69,13 @@
                 class="btn btn-outline-danger text-start border-0 rounded-0 {{ Request::is('admin/salidas') || Request::is('admin/salidas/*') ? 'active' : '' }}">
                 <i class="fa-solid fa-dolly fa-xl"></i>
                 Salidas
+            </a>
+        </li>
+        <li class="py-1">
+            <a href="{{ url('admin/ingresos') }}"
+                class="btn btn-outline-danger text-start border-0 rounded-0 {{ Request::is('admin/ingresos') || Request::is('admin/ingresos/*') ? 'active' : '' }}">
+                <i class="fa-solid fa-people-carry-box fa-xl"></i>
+                Ingresos
             </a>
         </li>
         <li class="py-1">
