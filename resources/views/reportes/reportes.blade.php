@@ -9,7 +9,7 @@
         $mes = date('n', $timestamp);
     @endphp
     <div class="row">
-        <div class="col-12  col-lg-6 col-xl-6 col-xxl-3 mb-4">
+        <div class="col-12  col-lg-6 col-xl-6 mb-4">
             <div class="card shadow-sm">
                 <div class="card-body d-flex align-items-center justify-content-center px-4" style="height: 7em;">
                     <div class="col">
@@ -26,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12  col-lg-6 col-xl-6 col-xxl-3 mb-4">
+        <div class="col-12  col-lg-6 col-xl-6 mb-4">
             <div class="card shadow-sm">
                 <div class="card-body d-flex align-items-center justify-content-center px-4" style="height: 7em;">
                     <div class="col">
@@ -43,7 +43,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12  col-lg-6 col-xl-6 col-xxl-3 mb-4">
+        <div class="col-12  col-lg-6 col-xl-6 col-xxl-4 mb-4">
             <div class="card shadow-sm">
                 <div class="card-body d-flex align-items-center justify-content-center px-4" style="height: 7em;">
                     <div class="col">
@@ -60,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12  col-lg-6 col-xl-6 col-xxl-3 mb-4">
+        <div class="col-12  col-lg-6 col-xl-6 col-xxl-4 mb-4">
             <div class="card shadow-sm">
                 <div class="card-body d-flex align-items-center justify-content-center px-4" style="height: 7em;">
                     <div class="col">
@@ -72,6 +72,23 @@
                         </div>
                         <div class="col-12 text-end">
                             <small><b>Valor compras</b></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12  col-lg-6 col-xl-6 col-xxl-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body d-flex align-items-center justify-content-center px-4" style="height: 7em;">
+                    <div class="col">
+                        <i class="fa-solid fa-warehouse fa-3x text-dark"></i>
+                    </div>
+                    <div class="col">
+                        <div class="col-12 text-end">
+                            <h3><b>$ {{ number_format($valorMercancia) }}</b></h3>
+                        </div>
+                        <div class="col-12 text-end">
+                            <small><b>Valor de mercancia</b></small>
                         </div>
                     </div>
                 </div>

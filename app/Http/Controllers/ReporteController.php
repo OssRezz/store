@@ -18,7 +18,11 @@ class ReporteController extends Controller
         $valorVendido = Venta::where('fecha', '=', date('Y-m-d'))->sum('valor_total');
         $valorComprado = Compra::where('fecha', '=', date('Y-m-d'))->sum('valor_total');
 
-        return view('reportes.reportes', compact('cantidadVentas', 'cantidadCompras', 'valorVendido', 'valorComprado'));
+        $valorMercancia = Inventario::join('productos', 'productos.id', '=', 'inventario.producto_id')
+            ->selectRaw('SUM(productos.precio_venta * inventario.cantidad) as total')->get();
+
+        $valorMercancia = count($valorMercancia) === 0 ? 0 : $valorMercancia[0]['total'];
+        return view('reportes.reportes', compact('cantidadVentas', 'cantidadCompras', 'valorVendido', 'valorComprado', 'valorMercancia'));
     }
 
     public function chartLine()

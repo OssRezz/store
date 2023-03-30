@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Compra;
 use App\Models\DetalleVenta;
+use App\Models\Gasto;
 use App\Models\Inventario;
 use App\Models\Venta;
 use Illuminate\Support\Facades\DB;
@@ -40,10 +41,17 @@ class CuadreController extends Controller
 
         $cantidadCompras = Compra::where('fecha', '=', date('Y-m-d'))->count();
         $valorVendido = Venta::where('fecha', '=', date('Y-m-d'))->sum('valor_total');
-        $valorComprado = Compra::where('fecha', '=', date('Y-m-d'))->sum('valor_total');
-        $cuadre = $valorVendido - $valorComprado;
+        $valorGastado = Gasto::where('fecha', '=', date('Y-m-d'))->sum('valor');
+        $cuadre = $valorVendido - $valorGastado;
 
-        return view('reportes.cuadres', compact('efectivo', 'transaccion', 'valorVendido', 'valorComprado', 'cuadre'));
+        $inicio = date("Y-m-01");
+        $fin = date("Y-m-t");
+        $valorVendidoMesActual = Venta::whereBetween('fecha', [$inicio, $fin])->sum('valor_total');
+        $valorGastadoMesActual = Gasto::whereBetween('fecha', [$inicio, $fin])->sum('valor');
+        $CuadreMensual = $valorVendidoMesActual - $valorGastadoMesActual;
+
+
+        return view('reportes.cuadres', compact('efectivo', 'transaccion', 'valorVendido', 'cuadre', 'valorGastado', 'CuadreMensual'));
     }
 
     public function chartLine()

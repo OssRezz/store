@@ -9,7 +9,24 @@
         $mes = date('n', $timestamp);
     @endphp
     <div class="row">
-        <div class="col-12  col-lg-6 col-xl-6 mb-4">
+        <div class="col-12  col-lg-6 col-xl-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body d-flex align-items-center justify-content-center px-4" style="height: 7em;">
+                    <div class="col">
+                        <i class="fa-solid fa-calendar-days fa-3x text-dark"></i>
+                    </div>
+                    <div class="col">
+                        <div class="col-12 text-end">
+                            <h3><b>${{ number_format($CuadreMensual) }}</b></h3>
+                        </div>
+                        <div class="col-12 text-end">
+                            <small><b>Cuadre mensual</b></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12  col-lg-6 col-xl-4 mb-4">
             <div class="card shadow-sm">
                 <div class="card-body d-flex align-items-center justify-content-center px-4" style="height: 7em;">
                     <div class="col">
@@ -26,7 +43,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12  col-lg-6 col-xl-6 mb-4">
+        <div class="col-12  col-lg-6 col-xl-4 mb-4">
             <div class="card shadow-sm">
                 <div class="card-body d-flex align-items-center justify-content-center px-4" style="height: 7em;">
                     <div class="col">
@@ -34,10 +51,10 @@
                     </div>
                     <div class="col">
                         <div class="col-12 text-end">
-                            <h3><b>${{ number_format($valorComprado) }}</b></h3>
+                            <h3><b>${{ number_format($valorGastado) }}</b></h3>
                         </div>
                         <div class="col-12 text-end">
-                            <small><b>Valor compras</b></small>
+                            <small><b>Valor gastos</b></small>
                         </div>
                     </div>
                 </div>
@@ -88,7 +105,7 @@
                             <h3><b>${{ number_format($cuadre) }}</b></h3>
                         </div>
                         <div class="col-12 text-end">
-                            <small><b>Cuadre caja</b></small>
+                            <small><b>Cuadre caja diario</b></small>
                         </div>
                     </div>
                 </div>
