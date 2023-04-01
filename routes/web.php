@@ -37,12 +37,14 @@ Route::post('user/logout', [LoginController::class, 'logout']);
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], function () {
 
     Route::get('salidas', [SalidaController::class, 'index']);
+    Route::get('salidas/create', [SalidaController::class, 'create']);
     Route::get('salidas/edit/{id}', [SalidaController::class, 'edit']);
     Route::get('salidas/{producto}', [SalidaController::class, 'new']);
     Route::post('salidas/store', [SalidaController::class, 'store']);
     Route::put('salidas/update/{salida}', [SalidaController::class, 'update']);
 
     Route::get('ingresos', [IngresosController::class, 'index']);
+    Route::get('ingresos/create', [IngresosController::class, 'create']);
     Route::get('ingresos/edit/{id}', [IngresosController::class, 'edit']);
     Route::get('ingresos/{producto}', [IngresosController::class, 'new']);
     Route::post('ingresos/store', [IngresosController::class, 'store']);

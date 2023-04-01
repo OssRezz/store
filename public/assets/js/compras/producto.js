@@ -37,30 +37,48 @@ function agregarProducto() {
         return alertaToast("Todos los campos son requeridos", "primary");
     }
 
-    carritoDeCompra.length == 0
-        ? (carritoDeCompra = [
-              {
-                  id: Date.now(),
-                  nombre: nombre.value,
-                  codigo: codigo.value,
-                  valor: valor_unidad.value,
-                  unidades: unidades.value,
-                  observaciones: observaciones.value,
-                  total: valor_unidad.value * unidades.value,
-              },
-          ])
-        : (carritoDeCompra = [
-              ...carritoDeCompra,
-              {
-                  id: Date.now(),
-                  nombre: nombre.value,
-                  codigo: codigo.value,
-                  valor: valor_unidad.value,
-                  unidades: unidades.value,
-                  observaciones: observaciones.value,
-                  total: valor_unidad.value * unidades.value,
-              },
-          ]);
+    let ProductExist = carritoDeCompra.filter(
+        (product) => product.codigo == codigo.value
+    );
+
+    if (ProductExist.length !== 0) {
+        carritoDeCompra.map((obj) => {
+            if (obj.codigo == codigo.value) {
+                let Total_Unidades =
+                    parseInt(obj.unidades) + parseInt(unidades.value);
+                obj.unidades = Total_Unidades;
+                obj.total =
+                    obj.total + valor_unidad.value * unidades.value;
+            }
+        });
+
+        console.log(carritoDeCompra);
+    } else {
+        carritoDeCompra.length == 0
+            ? (carritoDeCompra = [
+                  {
+                      id: Date.now(),
+                      nombre: nombre.value,
+                      codigo: codigo.value,
+                      valor: valor_unidad.value,
+                      unidades: unidades.value,
+                      observaciones: observaciones.value,
+                      total: valor_unidad.value * unidades.value,
+                  },
+              ])
+            : (carritoDeCompra = [
+                  ...carritoDeCompra,
+                  {
+                      id: Date.now(),
+                      nombre: nombre.value,
+                      codigo: codigo.value,
+                      valor: valor_unidad.value,
+                      unidades: unidades.value,
+                      observaciones: observaciones.value,
+                      total: valor_unidad.value * unidades.value,
+                  },
+              ]);
+    }
 
     nombre.value = "";
     codigo.value = "";

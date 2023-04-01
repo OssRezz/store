@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateSalidaRequest;
 use App\Models\Inventario;
+use App\Models\Producto;
 use App\Models\Salida;
 use Illuminate\Http\Request;
 
@@ -24,11 +25,25 @@ class SalidaController extends Controller
     {
         Salida::create($request->validated());
         $isTheProductInInventory = Inventario::where('producto_id', $request->producto_id)->get();
-        $iventario = Inventario::find($isTheProductInInventory[0]['id']);
-        $iventario->cantidad =  $isTheProductInInventory[0]['cantidad'] - $request->cantidad;
-        $iventario->update();
+        $inventario = Inventario::find($isTheProductInInventory[0]['id']);
 
+        // if ($request->cantidad > $inventario->cantidad) {
+        //     return redirect()->back()->with('message', 'La cantidad es mayor a la del inventario');
+        // }
+
+        $inventario->cantidad =  $isTheProductInInventory[0]['cantidad'] - $request->cantidad;
+        $inventario->update();
+
+        if ($request->action === "create") {
+            return redirect()->back()->with('message', 'Salida creada exitosamente');
+        }
         return redirect()->to('admin/inventarios')->with('message', 'Salida creada exitosamente');
+    }
+
+    public function create()
+    {
+        $inventario = Inventario::with('ProductoFk')->get();
+        return view('salidas.salidas', compact('inventario'));
     }
 
     public function edit($id)

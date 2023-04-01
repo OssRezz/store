@@ -33,6 +33,7 @@
 
                     <form method="POST" action="{{ url('admin/salidas/store') }}">
                         @csrf
+                        <input type="text" name="action" value="salida" hidden>
                         <input type="text" name="user_id" value="{{ Auth::user()->id }}" hidden>
                         <div class="form-floating mb-3" hidden>
                             <input type="text" name="producto_id" value="{{ $producto->productoFk->id }}" readonly />

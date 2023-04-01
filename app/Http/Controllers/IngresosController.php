@@ -46,6 +46,10 @@ class IngresosController extends Controller
         $iventario->cantidad =  $isTheProductInInventory[0]['cantidad'] + $request->cantidad;
         $iventario->update();
 
+        if ($request->action === "create") {
+            return redirect()->back()->with('message', 'Ingreso creado exitosamente');
+        }
+
         return redirect()->to('admin/inventarios')->with('message', 'Ingreso creado exitosamente');
     }
 
@@ -91,5 +95,9 @@ class IngresosController extends Controller
         return redirect()->to('admin/ingresos')->with('message', 'Ingreso actualizado exitosamente');
     }
 
-
+    public function create(Request $request)
+    {
+        $inventario = Inventario::with('ProductoFk')->get();
+        return view('ingresos.ingresos', compact('inventario'));
+    }
 }

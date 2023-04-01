@@ -1,7 +1,13 @@
 @extends('layouts.layaout')
 @section('title', 'Salidas')
 @section('content')
-
+    <div class="row d-flex align-items-center mb-4">
+        <div class="col">
+            <a class="btn btn-danger" href="{{ url('admin/salidas/create') }}">
+                <i class="fas fa-plus-square"></i> Agregar salida
+            </a>
+        </div>
+    </div>
     <div class="row mb-0">
         <div class="col">
             @if (session('message'))

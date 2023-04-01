@@ -23,7 +23,6 @@ colSegundaForma.setAttribute("hidden", true);
 colValorSegunda.setAttribute("hidden", true);
 
 function selectProduct(e) {
-    console.log();
     $.ajax({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -32,7 +31,6 @@ function selectProduct(e) {
         type: "GET",
         data: { id: e.id },
         success: function (result) {
-            console.log(result);
             nombre.value = result.nombre;
             codigo.value = result.codigo;
             valor_unidad.value = result.precio_venta;
@@ -61,42 +59,69 @@ function agregarProducto() {
         );
     }
     const dcto = descuento.value == null ? 0 : descuento.value;
+    let ProductExist = carritoDeVenta.filter(
+        (product) => product.codigo == codigo.value
+    );
 
-    carritoDeVenta.length == 0
-        ? (carritoDeVenta = [
-              {
-                  id: Date.now(),
-                  nombre: nombre.value,
-                  codigo: codigo.value,
-                  valor: valor_unidad.value,
-                  unidades: unidades.value,
-                  descuento: dcto,
-                  total: valor_unidad.value * unidades.value - dcto,
-                  tipo_venta: selectTipoVenta.value,
-              },
-          ])
-        : (carritoDeVenta = [
-              ...carritoDeVenta,
-              {
-                  id: Date.now(),
-                  nombre: nombre.value,
-                  codigo: codigo.value,
-                  valor: valor_unidad.value,
-                  unidades: unidades.value,
-                  descuento: dcto,
-                  total: valor_unidad.value * unidades.value - dcto,
-                  tipo_venta: selectTipoVenta.value,
-              },
-          ]);
+    if (ProductExist.length !== 0) {
+        carritoDeVenta.map((obj) => {
+            if (obj.codigo == codigo.value) {
+                let Total_Unidades =
+                    parseInt(obj.unidades) + parseInt(unidades.value);
+                total = existencias.value - Total_Unidades;
+                if (total < 0) {
+                    return alertaToast(
+                        "Las unidades a vender, son mayores a las que existen en el inventario: " +
+                            total +
+                            " uds",
+                        "danger"
+                    );
+                }
+                obj.unidades = Total_Unidades;
+                obj.total =
+                    obj.total + valor_unidad.value * unidades.value - dcto;
+            }
+        });
+
+        console.log(carritoDeVenta);
+    } else {
+        carritoDeVenta.length == 0
+            ? (carritoDeVenta = [
+                  {
+                      id: Date.now(),
+                      nombre: nombre.value,
+                      codigo: codigo.value,
+                      valor: valor_unidad.value,
+                      unidades: unidades.value,
+                      descuento: dcto,
+                      total: valor_unidad.value * unidades.value - dcto,
+                      tipo_venta: selectTipoVenta.value,
+                  },
+              ])
+            : (carritoDeVenta = [
+                  ...carritoDeVenta,
+                  {
+                      id: Date.now(),
+                      nombre: nombre.value,
+                      codigo: codigo.value,
+                      valor: valor_unidad.value,
+                      unidades: unidades.value,
+                      descuento: dcto,
+                      total: valor_unidad.value * unidades.value - dcto,
+                      tipo_venta: selectTipoVenta.value,
+                  },
+              ]);
+    }
 
     nombre.value = "";
     codigo.value = "";
     valor_unidad.value = "";
     unidades.value = "";
     cargarCarrito(carritoDeVenta);
-    console.log(carritoDeVenta);
     // return alertaToast("Producto agregado", "success");
 }
+
+function FindProducto($id) {}
 
 function cargarCarrito(carrito) {
     clean("#carrito");
@@ -212,7 +237,6 @@ function guardarCompra() {
                 colSegundaForma.hidden == true ? null : valor_pago_dos.value,
         },
         success: function (result) {
-            console.log(result[0]);
             factura.innerHTML = result[1];
             cargarIventario(result[0]);
             clean("#carrito");
